@@ -7,6 +7,7 @@ import org.luma.ecommerce.pages.HomePage;
 import org.luma.ecommerce.pages.LoginPage;
 import org.luma.ecommerce.pages.ProductsMenuPage;
 import org.luma.ecommerce.tests.Base_Tests;
+import org.testng.Assert;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -34,8 +35,23 @@ public class LoginStepDefintion extends Base_Tests
    public void enter_credentials(String email,String password)
    {
 	    productmenupage = login.loginDetails(email,password);
-	    driver.close();
+	    
    }
+   
+   @Then("Login page shows {string} message")
+   public void error_message(String actualMessage)
+   {
+	   String expectedMessage = login.LoginError();
+	   Assert.assertEquals(expectedMessage, actualMessage);
+	   
+   }
+   
+   @Then("Close the browser")
+   public void tearDown() 
+   { 
+	  driver.close();
+   }
+   
    
    
    
